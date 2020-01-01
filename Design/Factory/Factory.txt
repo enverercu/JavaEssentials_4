@@ -1,0 +1,12 @@
+In Factory pattern, we create object without exposing the creation logic to the client and
+refer to newly created object using a common interface.
+
+What is the difference between factory and abstract factory pattern?
+
+The differences between factory and abstract factory are following:
+
+- Factory pattern is a single method but abstract factory is an object.
+- The Abstract Factory pattern is one level of abstraction higher than the factory pattern.
+- Factory pattern generally returns the common parent class or method 
+  whereas the abstract factory pattern returns the one of the several factories.
+

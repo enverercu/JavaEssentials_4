@@ -1,0 +1,35 @@
+Autowiring by @Qualifier
+
+@Component("fooFormatter")
+public class FooFormatter implements Formatter {
+ 
+    public String format() {
+        return "foo";
+    }
+}
+
+@Component("barFormatter")
+public class BarFormatter implements Formatter {
+ 
+    public String format() {
+        return "bar";
+    }
+}
+
+public class FooService {
+     
+    @Autowired
+    private Formatter formatter;
+ 
+}
+Since there are two concrete implementations of Formatter available for the Spring container to inject, 
+Spring will throw a NoUniqueBeanDefinitionException exception when constructing the FooService:
+
+This can be avoided by narrowing the implementation using a @Qualifier annotation:
+public class FooService {
+     
+    @Autowired
+    @Qualifier("fooFormatter")
+    private Formatter formatter;
+ 
+}

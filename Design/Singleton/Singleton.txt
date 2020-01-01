@@ -1,0 +1,8 @@
+This pattern involves a single class which is responsible to create an object while making sure
+that only single object gets created.
+
+What is Singleton?
+- Singleton in Java is a class with just one instance in whole Java application.
+- This make sure that only one instance of a class is created.
+- The getInstance() method is used to get single instance of the class.
+- It creates a global point to access all object.

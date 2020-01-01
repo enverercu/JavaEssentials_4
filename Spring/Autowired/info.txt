@@ -1,0 +1,62 @@
+AUTOWIRED == INJECTION
+This annotation allows Spring to resolve and inject collaborating beans into your bean.
+
+we will look at how to enable autowiring, various ways to wire in beans, making beans optional, 
+resolving bean conflicts using @Qualifier annotation along with potential exception scenarios.
+
+*************
+@Autowired on Properties
+The annotation can be used directly on properties, therefore eliminating the need for getters and setters:
+
+@Component("fooFormatter")
+public class FooFormatter {
+ 
+    public String format() {
+        return "foo";
+    }
+}
+
+@Component
+public class FooService {
+     
+    @Autowired
+    private FooFormatter fooFormatter;
+ 
+}
+
+In the above example, Spring looks for and injects fooFormatter when FooService is created.
+
+*************
+@Autowired on Setters
+
+The @Autowired annotation can be used on setter methods. In the below example, when the annotation 
+is used on the setter method, the setter method is called with the instance of 
+FooFormatter when FooService is created:
+
+public class FooService {
+ 
+    private FooFormatter fooFormatter;
+ 
+    @Autowired
+    public void setFooFormatter(FooFormatter fooFormatter) {
+            this.fooFormatter = fooFormatter;
+    }
+}
+
+*************
+The @Autowired annotation can also be used on constructors. 
+In the below example, when the annotation is used on a constructor, 
+an instance of FooFormatter is injected as an argument to the constructor when FooService is created:
+
+public class FooService {
+ 
+    private FooFormatter fooFormatter;
+ 
+    @Autowired
+    public FooService(FooFormatter fooFormatter) {
+        this.fooFormatter = fooFormatter;
+    }
+}
+
+ 
+

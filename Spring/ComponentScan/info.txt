@@ -1,0 +1,46 @@
+package com.apress.prospringmvc.bookstore.web.config;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+// Other imports ommitted
+
+@Configuration
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.apress.prospringmvc.bookstore.web" })
+public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
+    // Other methods ommitted
+    @Override
+    public void addViewControllers(final ViewControllerRegistry registry) {
+        registry.addViewController("/index.htm").setViewName("index");
+    }
+}
+
+Annotation-based Controllers
+package com.apress.prospringmvc.bookstore.web;    
+import org.springframework.stereotype.Controller;    
+import org.springframework.web.bind.annotation.RequestMapping;    
+import org.springframework.web.servlet.ModelAndView;    
+@Controller    
+public class IndexController {    
+@RequestMapping(value = "/index.htm")    
+    public ModelAndView indexPage() {     
+        return new ModelAndView(“index");    
+    }    
+}
+
+Simply put - @ComponentScan tells Spring in which packages you have annotated classes which should be managed 
+by Spring. So, for example, if you have a class annotated with @Controller which is in a package
+which is not scanned by Spring, you will not be able to use it as Spring controller.
+
+Classes annotated with @Configuration is a new way of configuring Spring using annotations 
+instead of XML files (it's called Java configuration). 
+Spring needs to know which packages contain spring beans, otherwise you would have to 
+register each bean individually. That's what @ComponentScan is used for.
+
+
+In your example, you tell Spring that package com.apress.prospringmvc.bookstore.web contains
+classes which should be handled by Spring. Spring then finds a class annotated with @Controller, 
+and processes it, which results in all requests coming to /index.htm being intercepted by the controller.
+
+If @Controller annotation wasn't present, or that package wasn't scanned by Spring, 
+all of this would not be possible.
+     

@@ -1,0 +1,40 @@
+In addition to classes, AOP gives you aspect, which enables modularization of concerns 
+such as Transaction management or logging and can be separated out from the application business logic of the code.
+
+What are Advice, Aspect, Join-point and point cut in spring?
+
+Advice :
+An advice is an action taken by the aspect at particular join-point is called Advice.
+
+Aspect :
+An aspect is a subprogram which is associated with specific property of a program (Example separating logging code from the main program). An aspect is functionality or feature that cross cuts over object. AOP increase modularity of a program.
+
+Join-Point :
+A join point is a point used in spring AOP framework to represent a method execution. It always point during execution of program, method or exception. A join point is basically an opportunity within the code to apply aspect.
+
+Point Cut :
+In AOP a point cut is a set of many join points where an advice can execute. A chunk of code (known as Advice) associated with join point get executed.
+
+
+What are the different types of Advice?
+There are different types of Advice.
+
+Before Advice :
+The advice which executed before a join point called before advice. The before advice does not have the ability to prevent the execution flow proceeding at the join point (unless it throws an exception).
+
+After Return Advice :
+The advice which executed after a join point completed normally without any exception.
+
+Around Advice :
+It is responsible for choosing whether to proceeds to the join point or shortcut 
+the advised method execution by returning its own return value or throwing an exception. 
+This is most powerful kind of advice. 
+With Around advice you can perform custom behavior before and after method execution.
+
+After Throwing Advice :
+The advice executed when a method throws an exception
+
+
+After (finally) Advice :
+The advice is executed when program exits the join points either normally or by throwing an exception.
+

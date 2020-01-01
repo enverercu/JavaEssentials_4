@@ -1,0 +1,109 @@
+Suppose we are building an application which contains a feature to send SMS confirmation messages once the order has been shipped. We will have two classes, one is responsible for sending the SMS (SMSService), and another responsible for capturing user inputs (UIHandler), our code will look as below:
+
+public class SMSService
+{
+    public void SendSMS(string mobileNumber, string body)
+    {
+        SendSMSUsingGateway(mobileNumber, body);
+    }
+
+    private void SendSMSUsingGateway(string mobileNumber, string body)
+    {
+        /*implementation for sending SMS using gateway*/
+    }
+}
+
+public class UIHandler
+{
+    public void SendConfirmationMsg(string mobileNumber)
+    {
+        SMSService _SMSService = new SMSService();
+        _SMSService.SendSMS(mobileNumber, "Your order has been shipped successfully!");
+    }
+}
+Above implementation is not wrong but there are few issues:
+-) Suppose On development environment, you want to save SMSs sent to a text file instead of using SMS gateway, to achieve this; we will end up changing the concrete implementation of (SMSService) with another implementation, we are losing flexibility and forced to rewrite the code in this case.
+-) We’ll end up mixing responsibilities of classes, our (UIHandler) should never know about the concrete implementation of (SMSService), this should be done outside the classes using “Interfaces”. When this is implemented, it will give us the ability to change the behavior of the system by swapping the (SMSService) used with another mock service which implements the same interface, this service will save SMSs to a text file instead of sending to mobileNumber.
+
+To fix the above issues we use Interfaces which will be implemented by our (SMSService) and the new (MockSMSService), basically the new Interface (ISMSService) will expose the same behaviors of both services as the code below:
+
+public interface ISMSService
+{
+    void SendSMS(string phoneNumber, string body);
+}
+Then we will change our (SMSService) implementation to implement the (ISMSService) interface:
+
+public class SMSService : ISMSService
+{
+    public void SendSMS(string mobileNumber, string body)
+    {
+        SendSMSUsingGateway(mobileNumber, body);
+    }
+
+    private void SendSMSUsingGateway(string mobileNumber, string body)
+    {
+        /*implementation for sending SMS using gateway*/
+        Console.WriteLine("Sending SMS using gateway to mobile: 
+        {0}. SMS body: {1}", mobileNumber, body);
+    }
+}
+Now we will be able to create new mock up service (MockSMSService) with totally different implementation using the same interface:
+
+public class MockSMSService :ISMSService
+{
+    public void SendSMS(string phoneNumber, string body)
+    {
+        SaveSMSToFile(phoneNumber,body);
+    }
+
+    private void SaveSMSToFile(string mobileNumber, string body)
+    {
+        /*implementation for saving SMS to a file*/
+        Console.WriteLine("Mocking SMS using file to mobile: 
+        {0}. SMS body: {1}", mobileNumber, body);
+    }
+}
+At this point, we can change the code in (UIHandler) to use the concrete implementation of the service (MockSMSService) easily as below:
+
+public class UIHandler
+{
+    public void SendConfirmationMsg(string mobileNumber)
+    {
+        ISMSService _SMSService = new MockSMSService();
+        _SMSService.SendSMS(mobileNumber, "Your order has been shipped successfully!");
+    }
+}
+We have achieved a lot of flexibility and implemented separation of concerns in our code, but still we need to do a change on the code base to switch between the two SMS Services. So we need to implement Dependency Injection.
+
+To achieve this, we need to implement a change to our (UIHandler) class constructor to pass the dependency through it, by doing this, the code which uses the (UIHandler) can determine which concrete implementation of (ISMSService) to use:
+
+public class UIHandler
+{
+    private readonly ISMSService _SMSService;
+
+    public UIHandler(ISMSService SMSService)
+    {
+        _SMSService = SMSService;
+    }
+
+    public void SendConfirmationMsg(string mobileNumber)
+    {
+        _SMSService.SendSMS(mobileNumber, "Your order has been shipped successfully!");
+    }
+}
+Now the UI form which will talk with class (UIHandler) is responsible to pass which implementation of interface (ISMSService) to consume. This means we have inverted the control, the (UIHandler) is no longer responsible to decide which implementation to use, the calling code does. We have implemented the Inversion of Control principle which DI is one type of it.
+
+The UI form code will be as below:
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ISMSService _SMSService = new MockSMSService(); // dependency
+
+        UIHandler _UIHandler = new UIHandler(_SMSService);
+        _UIHandler.SendConfirmationMsg("96279544480");
+
+        Console.ReadLine();
+    }
+}

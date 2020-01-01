@@ -1,0 +1,18 @@
+Hibernate - Caching
+
+Caching is a mechanism to enhance the performance of a system. 
+It is a buffer memory that lies between the application and the database.
+
+Cache memory stores recently used data items in order to reduce the number of database hits as much as possible.
+
+First-level Cache
+The first-level cache is the Session cache and is a mandatory cache through which all requests must pass.
+
+The Session object keeps an object under its own power before committing it to the database.
+
+Query-level Cache
+Hibernate also implements a cache for query resultsets that integrates closely with the second-level cache.
+
+This is an optional feature and requires two additional physical cache regions that hold the cached query results and the timestamps when a table was last updated. 
+This is only useful for queries that are run frequently with the same parameters.
+

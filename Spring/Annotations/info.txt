@@ -1,0 +1,15 @@
+Hibernate - What is the advantage of Hibernate over jdbc?
+Hibernate code will work well for all databases, for ex: Oracle,MySQL, etc. where as JDBC is database specific...
+
+What are the annotations supported by the spring framework?
+
+Due to addition of some core features from the JavaConfig project to the Spring Framework,the following annotations are now directly supported :
+- @Configuration
+- @Bean
+- @DependsOn
+- @Primary
+- @Lazy
+- @Import
+- @ImportResource
+- @Value
+

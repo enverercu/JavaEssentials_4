@@ -1,0 +1,70 @@
+How would you integrate Spring and Hibernate using HibernateDaoSupport?
+This can be done through Spring’s SessionFactory called LocalSessionFactory. The steps in integration process are:
+1. Configure the Hibernate SessionFactory.
+2. Extend your DAO Implementation from HibernateDaoSupport.
+3. Wire in Transaction Support with AOP.
+
+Hibernate maps Java classes to database tables and from Java data types to SQL data types
+
+Hibernate is an Object-Relational Mapping (ORM) solution for JAVA
+
+Hibernate sits between traditional Java objects and database server to handle all the works in persisting those objects based on the appropriate O/R mechanisms and patterns.
+
+Hibernate takes care of mapping Java classes to database tables using XML files and without writing any line of code.
+
+.SessionFactory Object
+The SessionFactory is a thread safe object and used by all the threads of an application.
+
+The SessionFactory is a heavyweight object; it is usually created during application start up and kept for later use.
+
+You would need one SessionFactory object per database.
+
+.Session Object
+A Session is used to get a physical connection with a database.
+
+Persistent objects are saved and retrieved through a Session object.
+
+The Session object is lightweight and designed to be instantiated each time an interaction is needed with the database.
+
+The session objects should not be kept open for a long time because they are not usually thread safe and they should be created and destroyed them as needed.
+
+.Transaction Object
+A Transaction represents a unit of work with the database and most of the RDBMS supports transaction functionality. 
+
+This is an optional object and Hibernate applications may choose not to use this interface, instead managing transactions in their own application code.
+
+.Query Object
+Query objects use SQL or Hibernate Query Language (HQL) string to retrieve data from the database and create objects.
+
+
+Hibernate - Sessions
+Instances may exist in one of the following three states at a given point in time.
+
+transient − A new instance of a persistent class, which is not associated with a Session and has no representation in the database and no identifier value is considered transient by Hibernate.
+
+persistent − You can make a transient instance persistent by associating it with a Session. A persistent instance has a representation in the database, an identifier value and is associated with a Session.
+
+detached − Once we close the Hibernate Session, the persistent instance will become a detached instance.
+
+A Session instance is serializable if its persistent classes are serializable.
+
+
+Hibernate - Persistent Class
+The entire concept of Hibernate is to take the values from Java class attributes and persist them to a database table.
+
+Java classes whose objects or instances will be stored in database tables are called persistent classes in Hibernate.
+POJO
+Hibernate works best if these classes follow some simple rules, also known as the Plain Old Java Object (POJO) programming model.
+
+All Java classes that will be persisted need a default constructor.
+
+All classes should contain an ID in order to allow easy identification of your objects within Hibernate and the database. This property maps to the primary key column of a database table.
+
+All attributes that will be persisted should be declared private and have getXXX and setXXX methods defined in the JavaBean style.
+
+All classes that do not extend or implement some specialized classes and interfaces.
+
+The POJO name is used to emphasize that a given object is an ordinary Java Object, not a special object.
+
+
+

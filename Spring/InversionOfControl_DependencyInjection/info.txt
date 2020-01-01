@@ -1,0 +1,50 @@
+You don’t directly connect your component and services together in code 
+but describe which services are needed by which component in configuration file.
+
+You need to inject different implementation of the same dependency.
+
+
+public class Voltran {
+    private GucKaynagi kaynak;
+    public Voltran() {
+        kaynak= new GucKaynagi();
+    }
+}
+
+Yukarýdaki ufak kod örneðinde Voltran içerisinde kullanýðý GucKaynagini nesnesini 
+kendi oluþturuyor (new()  GucKaynagi ). Bu þu anlama geliyor Voltran sýnýfý direk ve göbekten GucKaynagi sýnýfýna baðlýdýr.
+ Bunun neresi kötü ki ? Kötü tarafý þudur; yarýn öbür gün GucKaynagi sýnýfý deðiþirse, 
+ bu deðiþiklikten bir haber olan Voltran sýnýfýný da etkilenecektir. 
+ Bu örnek çerçevesinde ne var ki Voltran sýnýfýný da hemen deðiþtiririm diyebilirsiniz 
+ ama 100 veya 200 adet sýnýf bulunan bir projede bunu yapmanýz o kadar da kolay deðildir.
+ 
+ Ioc aslýnda;  kol kýrýlýr yen içinde kalýr atasözünün teknolojiye uyarlanmýþ halidir. 
+ GucKaynagi sinifi istediði kadar deðiþsin ama Voltran sýnýfýnýn bundan haberi olmasýn. 
+ Haberi olmasýn ki bende bir de Voltran sýnýfý ile uðraþmak zorunda kalmayayým.
+ 
+ public class Voltran {    
+  private IGucKaynagi kaynak;
+
+  public setGucKaynagi(IGucKaynagi kaynak) {
+        this.kaynak = kaynak
+  }
+  public Voltran() { 
+     voltran.kullan(kaynak); // bu kismi salladim..  
+  }
+}
+
+Burada GucKaynagi sýnýfý neden IGucKaynagi oldu ? Cevap : Baþýnda I eklemek demek Interface demektir 
+(yani isimlendirme genelde böyle olur). Artýk IGucKaynagi sýnýfýnýn þartlarýný saðlayan 
+herhangi bir sýnýf Voltran sýnýfýna GucKaynagi olabilir. 
+Ya da olaya Voltran sýnýfý açýsýndan bakalým, artýk Voltran kendisine gelen güçün nereden geldiðini umursamýyor. 
+Üzümü yiyor baðýný sormuyor, Voltran sýnýfý ile ona güç saðlayan sýnýf arasýndaki baðý kestik, 
+iþte decoupling denen olayda budur.
+
+
+Ýþte bu yukarýdaki þekilde ise IoC ürünü (örneðin Spring). 
+A nesnesinin ihtiyaç duyduðu diðer B ve C nesnelerini zerk ediyor.
+
+
+
+
+

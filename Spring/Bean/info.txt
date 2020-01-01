@@ -1,0 +1,68 @@
+
+
+
+What is Bean Wiring?
+- Bean wiring means creating associations between application components with beans within the spring container.
+
+Different Spring Bean Scope.
+1. singleton : Return a single bean instance per Spring IOC container.
+2. prototype : Return a new bean instance each time when requested.
+3. request : Return a single bean instance per HTTP request.
+4. session : Return a single bean instance per HTTP session.
+5. global session : Return a single bean instance per global HTTP session and only valid when used in portlet context.
+
+How you will decide when to use prototype scope and when singleton scope bean?
+- You should use the prototype scope for all beans that are stateful 
+and the singleton scope should be used for stateless beans.
+
+What are the different types of IOC?
+There are three types of dependency Injection:
+
+1. Constructor Injection :
+
+- Dependencies are provided as a constructor parameter.
+
+- Example : You want to inject some object say 'Foo' through constructor in class 'HellowWorld' like below.
+public class HelloWorld
+{
+public HelloWorld(Foo foo)
+   {
+       this.foo = foo;
+   }
+}
+
+In configuration file you need to do following entry.
+<bean id="helloWorldBean" class="com.xyz.services.HelloWorld">
+<constructor-arg ref="fooBean" />
+</bean>
+<bean id="fooBean" class="com.xyz.service.Foo">
+</bean>
+
+2. Setter Injection :
+
+- Dependencies are assigned through setter method.
+
+- Example : Same example as above.
+public class HelloWorld
+{
+private Foo fooBean;
+public HelloWorld(){ }
+public void setFooBean(Foo fooBean)
+{
+   this.fooBean=fooBean;
+}
+
+And in configuration file you need to do following entry.
+<bean id="helloWorldBean" class=" com.xyz.services.HelloWorld">
+<property name=fooBean ref="fooBean" />
+</bean>
+<bean id="fooBean" class="com.xyz.service.Foo">
+</bean>
+
+
+3. Interface Injection :
+
+Injection is done through an interface and not supported in spring framework.
+
+
+

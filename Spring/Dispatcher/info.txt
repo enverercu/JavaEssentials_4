@@ -1,0 +1,20 @@
+What is front controller in Spring MVC?
+In Spring MVC DispatcherServlet act as a Front Controller for the framework and responsible 
+for intercepting every request and then dispatches/forwards request to appropriate controller. 
+Configure the DispatcherServlet in the web.xml file of web application and request 
+which we want to be handled by DispatcherServlet should be mapped using URL mapping.
+
+For example all the requests ending with *.do will be handled by the DispatcherServlet
+
+<web-app>
+<servlet>
+<servlet-name>example</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+<load-on-startup>1</load-on-startup>
+</servlet>
+	<servlet-mapping>
+	<servlet-name>example</servlet-name>
+	<url-pattern>*.do</url-pattern>
+</servlet-mapping>
+</web-app>
+
