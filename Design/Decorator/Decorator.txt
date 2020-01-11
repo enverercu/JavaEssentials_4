@@ -1,3 +1,22 @@
+Decorator design pattern is used to "enhance the functionality" of a particular object at run-time
+
+At the same time "other instance" of same class "will not be affected" by this so individual object gets the new behavior.
+
+Basically we wrap the original object through decorator object.
+
+Decorator design pattern is based on abstract classes and we derive concrete implementation from that classes,
+
+Decorator pattern makes possible that we provide individual object of same class a specific behavior or state at run time. 
+This doesn’t affect other object of same Class in Java.
+
+when we want to add functionality to individual object not to all object at run-time we use decorator design pattern.
+
+SO OBJECT LEVEL NOT CLASS LEVEL!!
+
+
+
+
+
 Decorator pattern allows a user to add new functionality to an existing object without altering its structure.
 This type of design pattern comes under structural pattern as this pattern acts as a wrapper to existing class.
 

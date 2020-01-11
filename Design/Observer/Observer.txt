@@ -1,3 +1,18 @@
+Observer design pattern is based on communicating changes in state of object to observers so that they can take there action.
+
+Simple example is a weather system where change in weather must be reflected in Views to show to public. 
+Here weather object is Subject while different views are Observers
+
+Subject --> Observers
+
+For Example Company updates all its shareholders for any decision they make here Company is Subject and Shareholders are Observers, any change in policy of company and Company notifies all its Shareholders or Observer.
+
+This is beautiful pattern and used heavily along with Model View Controller Design pattern 
+where change in model is propagated to view so that it can render it with modified information
+
+
+
+
 How are Observer and Observable used?
 - The observable class represents an observable object.
 - The object to be observed can be represented by sub-classing observable class.

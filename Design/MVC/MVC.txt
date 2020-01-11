@@ -1,3 +1,14 @@
+
+
+USER(USES)-->CONTROLLER(MANIPULATES)-->MODEL-->CONTROLLER(UPDATE VIEW)-->USER(SEES)
+
+MODEL = NEW MODEL();
+VIEW = NEW VIEW();
+"CONTROLLER = NEW CONTROLLER(MODEL,VIEW);"
+"CONTROLLER.SET(MODEL);"
+"CONTROLLER.UPDATE(VIEW);"
+
+
 MVC Pattern stands for Model-View-Controller Pattern. This pattern is used to separate application's concerns.
 
 Model - Model represents an object or JAVA POJO carrying data. It can also have logic to update controller

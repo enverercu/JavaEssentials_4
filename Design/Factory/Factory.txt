@@ -1,3 +1,24 @@
+So instead of having object creation code on client side we encapsulate inside Factory method in Java
+
+Factory pattern is a better choice than new operator for creating an object.
+
+Factory pattern encapsulate object creation logic which makes it easy to change it later
+
+Factory should be an interface and clients first either creates factory or get factory which later used to create objects
+
+Best Example of Factory method design pattern is valueOf() method which is there in String and wrapper classes like Integer and Boolean and used for type conversion i.e. from converting String to Integer or String to double in java..
+
+Whenever we create object using new() we violate principle of programming for interface rather than implementation which eventually result in inflexible code and difficult to change in maintenance. By using Factory design pattern in Java we get rid of this problem.
+
+valueOf() method which returns object created by factory equivalent to value of parameter passed.
+
+getInstance() method which creates instance of Singleton class.
+
+
+
+
+
+
 In Factory pattern, we create object without exposing the creation logic to the client and
 refer to newly created object using a common interface.
 
